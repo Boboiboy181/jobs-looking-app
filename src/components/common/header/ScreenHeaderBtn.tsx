@@ -11,7 +11,7 @@ import styles, { getBtnImgStyle } from './screenheader.style';
 type ScreenHeaderBtnTypes = {
   iconUrl: ImageSourcePropType;
   dimension: DimensionValue;
-  handlePress: () => void;
+  handlePress?: () => void;
 };
 
 const ScreenHeaderBtn = ({
