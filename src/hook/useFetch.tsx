@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import { Job } from '../types/job.type';
 
 type QueryType = {
-  query: string;
-  num_pages: string;
-  page: string;
+  job_id?: string;
+  query?: string;
+  num_pages?: string;
+  page?: string;
 };
 
 export const useFetch = (endpoint: string, query: QueryType) => {

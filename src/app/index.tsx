@@ -8,8 +8,12 @@ import {
   Welcome,
 } from '../components';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useState } from 'react';
 
 const Home = () => {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
@@ -22,7 +26,7 @@ const Home = () => {
           headerRight: () => (
             <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />
           ),
-          // headerTitle: '',
+          headerTitle: '',
         }}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -32,7 +36,15 @@ const Home = () => {
             padding: SIZES.medium,
           }}
         >
-          <Welcome />
+          <Welcome
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleClick={() => {
+              if (searchTerm.length > 0) {
+                router.push(`/search/${searchTerm}`);
+              }
+            }}
+          />
           <Popularjobs />
           <Nearbyjobs />
         </View>

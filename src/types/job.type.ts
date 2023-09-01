@@ -6,4 +6,10 @@ export type Job = {
   job_country: string;
   job_description: string;
   job_employment_type: string;
+  job_highlights: {
+    Qualifications: string[];
+    Responsibilities: string[];
+    Benefits: string[];
+  };
+  job_google_link: string;
 };

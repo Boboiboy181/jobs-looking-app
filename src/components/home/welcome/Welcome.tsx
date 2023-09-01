@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import styles, { tab, tabText } from './welcome.style';
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { SIZES, icons } from '../../../constants';
 
 const jobTypes = [
@@ -23,15 +23,20 @@ const jobTypes = [
   'Freelance',
 ];
 
-const Welcome = () => {
+type WelcomeProps = {
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  handleClick: (event: GestureResponderEvent) => void;
+};
+
+const Welcome = ({ searchTerm, setSearchTerm, handleClick }: WelcomeProps) => {
   const router = useRouter();
   const [activeJobTypes, setActiveJobTypes] = useState(jobTypes[0]);
-  const [searchValue, setSearchValue] = useState('');
 
   const onSearchHandler = (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
-    setSearchValue(e.nativeEvent.text);
+    setSearchTerm(e.nativeEvent.text);
   };
 
   return (
@@ -45,11 +50,11 @@ const Welcome = () => {
           <TextInput
             style={styles.searchInput}
             placeholder="What are you looking for?"
-            value={searchValue}
+            value={searchTerm}
             onChange={onSearchHandler}
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
           <Image
             source={icons.search}
             resizeMode="contain"
@@ -67,7 +72,7 @@ const Welcome = () => {
             <TouchableOpacity
               onPress={() => {
                 setActiveJobTypes(item);
-                // router.push(`/search/${item}`);
+                router.push(`/search/${item}`);
               }}
               style={tab(activeJobTypes, item)}
             >
