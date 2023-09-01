@@ -5,4 +5,5 @@ export type Job = {
   job_title: string;
   job_country: string;
   job_description: string;
+  job_employment_type: string;
 };

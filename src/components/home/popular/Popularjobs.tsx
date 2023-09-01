@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { View, Text, ActivityIndicator, FlatList } from 'react-native';
 
 import styles from './popularjobs.style';
@@ -19,6 +19,7 @@ const exampleData: Job[] = [
     job_description:
       'A large financial services client is seeking a Python Developer with experience in Azure Key Vault to join their growing team. This team is doing the initial implementation of Key Vault and building out a multi-cloud solution. This person will do access provisioning, credentials and storage. This role is hybrid in the office Tuesday-Thursday in one of the following locations: Malvern PA, Dallas TX, or Charlotte NC. Must Have Qualifications Strong Python development experience Experience working with Azure Key Vault Plusses: CyberArk tool suite',
     job_country: 'US',
+    job_employment_type: 'FULLTIME',
   },
 ];
 
@@ -29,6 +30,8 @@ const Popularjobs = () => {
   //   num_pages: '1',
   //   page: '1',
   // });
+
+  // console.log(data);
 
   const [selectedJob, setSelectedJob] = useState<string | undefined>();
 
@@ -55,19 +58,21 @@ const Popularjobs = () => {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          <FlatList
-            data={exampleData}
-            contentContainerStyle={{ columnGap: SIZES.medium }}
-            keyExtractor={(item) => item?.job_id}
-            renderItem={({ item }) => (
-              <PopularJobCard
-                item={item}
-                selectedJob={selectedJob}
-                handlePress={handleCardPress}
-              />
-            )}
-            horizontal={true}
-          />
+          <Fragment>
+            <FlatList
+              data={exampleData}
+              contentContainerStyle={{ columnGap: SIZES.medium }}
+              keyExtractor={(item: Job) => item?.job_id}
+              renderItem={({ item }) => (
+                <PopularJobCard
+                  item={item}
+                  selectedJob={selectedJob}
+                  handlePress={handleCardPress}
+                />
+              )}
+              horizontal={true}
+            />
+          </Fragment>
         )}
       </View>
     </View>
